@@ -71,10 +71,12 @@ export default function signUpScreen({ navigation }) {
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                <Heading mb={6}>Sign Up</Heading>
+                <Button size="xs" textAlign={'left'} justifyContent="left" variant="link" onClick={() => {router.push("./")}} mb={6} colorScheme='teal'>&lt;-Back</Button>
+                <Heading textAlign="center" mb={6}>Sign Up</Heading>
                 <Input placeholder="Email" variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={3} type="email" />
                 <Input placeholder="Password" variant="filled" onChange={(event) => setPassword({ ...password, value: event.currentTarget.value })} mb={6} type="password" />
                 <Button isLoading={loading} onClick={onSignUpPressed} mb={6} colorScheme='teal'>Register</Button>
+                <Button variant="link" onClick={() => {router.push("./signIn")}} colorScheme='teal'>Already have an account? Login now!</Button>
             </Flex>
         </Flex>
     )

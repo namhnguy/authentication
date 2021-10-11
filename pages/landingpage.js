@@ -14,10 +14,10 @@ export default function LandingPage() {
 
     if (user) {
         return (
-            <Flex height="100vh" alignItems="center" justifyContent="center">
-                <Heading mb={6}>Welcome {user.email}</Heading>
+            <Flex height="40vh" alignItems="center" justifyContent="center">
                 <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                    <Heading mb={6}>This is the landing page.</Heading>
+                    <Heading mb={6}>Welcome {user.email}!</Heading>
+                    <Heading textAlign="center" mb={6}>This is the landing page.</Heading>
                     <Button onClick={logoutUser} mb={6} colorScheme='teal'>Logout</Button>
                 </Flex>
             </Flex>
@@ -25,11 +25,11 @@ export default function LandingPage() {
     }
     else{
         return (
-            <Flex height="100vh" alignItems="center" justifyContent="center">
-                <Heading mb={6}>Welcome Anon</Heading>
+            <Flex height="40vh" alignItems="center" justifyContent="center">
                 <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                    <Heading mb={6}>This is the landing page.</Heading>
-                    <Button onClick={() => {router.push("./signIn")}} mb={6} colorScheme='teal'>Go to login</Button>
+                    <Heading textAlign="center" mb={6}>Welcome Guest!</Heading>
+                    <Heading textAlign="center" mb={6}>This is the landing page.</Heading>
+                    <Button onClick={() => {router.push("./signIn")}} mb={6} colorScheme='teal'>Go to sign in</Button>
                 </Flex>
             </Flex>
         )

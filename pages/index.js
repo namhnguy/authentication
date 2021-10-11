@@ -11,9 +11,10 @@ export default function StartPage() {
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                <Heading mb={6}>Welcome to HealthTok</Heading>
+                <Heading mb={6}>Welcome to HealthTok!</Heading>
                 <Button onClick={() => {router.push("./signIn")}} mb={6} colorScheme='teal'>Login</Button>
-                <Button onClick={() => {router.push("./signUp")}} mb={6} colorScheme='teal'>Sign Up</Button>
+                <Button onClick={() => {router.push("./signUp")}} mb={6} colorScheme='teal'>Create Account</Button>
+                <Button variant="link" onClick={() => {router.push("./landingpage")}} colorScheme='teal'>Continue as guest</Button>
             </Flex>
         </Flex>
     )

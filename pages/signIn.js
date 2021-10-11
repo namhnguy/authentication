@@ -71,13 +71,14 @@ export default function loginScreen({ navigation }) {
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
             <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                <Heading mb={6}>Sign In</Heading>
-                <Input placeholder="Email" variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={3} type="email" />
+                <Button size="xs" textAlign={'left'} justifyContent="left" variant="link" onClick={() => {router.push("./")}} mb={6} colorScheme='teal'>&lt;-Back</Button>
+                <Heading textAlign={'center'} mb={6}>Sign In</Heading>
+                <Input placeholder="E-mail" variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={3} type="email" />
                 <Input placeholder="Password" variant="filled" onChange={(event) => setPassword({ ...password, value: event.currentTarget.value })} mb={6} type="password" />
                 <Button isLoading={loading} onClick={onLoginPressed} mb={6} colorScheme='teal'>Login</Button>
+                <Button variant="link" onClick={() => {router.push("./resetpasswordpage")}} mb={2} colorScheme='teal'>Forgot password?</Button>
+                <Button variant="link" onClick={() => {router.push("./signUp")}} colorScheme='teal'>Don't have an account? Register now!</Button>
             </Flex>
         </Flex>
     )
 }
-
-

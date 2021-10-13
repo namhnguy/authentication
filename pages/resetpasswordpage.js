@@ -5,7 +5,6 @@ import { sendEmailWithPassword } from "../firebase/auth"
 import { Button } from '@chakra-ui/button'
 import { Input } from '@chakra-ui/input'
 import { Flex, Heading } from '@chakra-ui/layout'
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
 import { useToast } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 import { useRouter } from "next/router"
@@ -13,7 +12,6 @@ import { useRouter } from "next/router"
 export default function ResetPasswordPage({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [loading, setLoading] = useState()
-    const formBackground = useColorModeValue("gray.100", "gray.700")
     const toast = useToast()
     const router = useRouter()
     var successReset = false
@@ -54,13 +52,13 @@ export default function ResetPasswordPage({ navigation }) {
     }
 
     return (
-        <Flex height="100vh" alignItems="center" justifyContent="center">
-            <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                <Button size="xs" textAlign={'left'} justifyContent="left" variant="link" onClick={() => {router.push("./signIn")}} mb={6} colorScheme='teal'>&lt;-Back</Button>
-                <Heading textAlign="center" mb={2}>Reset Password</Heading>
-                <Text mb={4} fontSize="lg">You will receive password reset link at the email provided if it exist.</Text>
-                <Input placeholder="Email" variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={3} type="email" />
-                <Button isLoading={loading} onClick={sendResetPasswordEmail} onClick={() => {router.push("./successReset")}} mb={6} colorScheme='teal'>Send Password Reset Link</Button>
+        <Flex height="50vh" alignItems="center" justifyContent="center">
+            <Flex direction="column" p={12} rounded={6}>
+                <Button size="xs" textColor="black" fontSize="40" textAlign={'left'} justifyContent="left" variant="link" onClick={() => {router.push("./signIn")}} mb={6} colorScheme='gray'>&lt;-</Button>
+                <Heading textAlign="center" textColor="black" mb={40}>Reset Password</Heading>
+                <Heading mt={4} fontSize="14" textColor="black" textAlign={'left'} mb={1}>EMAIL ADDRESS:</Heading>
+                <Input variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={3} type="email" />
+                <Button background="gray.900" textColor='white' isLoading={loading} onClick={sendResetPasswordEmail} onClick={() => {router.push("./signIn")}} mb={6}>Send Reset Link</Button>
             </Flex>
         </Flex>
     )

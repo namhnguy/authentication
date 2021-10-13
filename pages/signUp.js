@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { signUpUser } from '../firebase/auth'
+import { emailAndPasswordComparer } from '../helpers/emailAndPasswordComparer'
 import { Button } from '@chakra-ui/button'
 import { Input } from '@chakra-ui/input'
 import { Flex, Heading } from '@chakra-ui/layout'
@@ -14,6 +15,8 @@ import { Box } from '@chakra-ui/react'
 export default function signUpScreen({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
+    const [confirmEmail, setConfirmEmail] = useState({ value: '', error: '' })
+    const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' })
     const [loading, setLoading] = useState()
     const formBackground = useColorModeValue("gray.100", "gray.700")
     const toast = useToast()
@@ -22,10 +25,15 @@ export default function signUpScreen({ navigation }) {
 
     const onSignUpPressed = async () => {
         const emailError = emailValidator(email.value)
+        const emailConfirmError = emailValidator(confirmEmail.value)
         const passwordError = passwordValidator(password.value)
-        if (emailError || passwordError) {
+        const passwordConfirmError = passwordValidator(confirmPassword.value)
+        const compareEmailAndPassword = emailAndPasswordComparer(email.value, confirmEmail.value, password.value, confirmPassword.value)
+        if (emailError || passwordError || emailConfirmError || passwordConfirmError || compareEmailAndPassword) {
             setEmail({ ...email, error: emailError })
             setPassword({ ...password, error: passwordError })
+            setConfirmEmail({ ...confirmEmail, error: emailConfirmError })
+            setConfirmPassword({ ...confirmPassword, error: passwordConfirmError })
             if (emailError) {
                 toast({
                     title: "Email Invalid",
@@ -39,6 +47,33 @@ export default function signUpScreen({ navigation }) {
                 toast({
                     title: "Password Invalid",
                     description: passwordError,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+            }
+            if (emailConfirmError) {
+                toast({
+                    title: "Confirm Email Invalid",
+                    description: emailConfirmError,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+            }
+            if (passwordConfirmError) {
+                toast({
+                    title: "Confirm Password Invalid",
+                    description: passwordConfirmError,
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+            }
+            if (compareEmailAndPassword) {
+                toast({
+                    title: "Email or Password do not match",
+                    description: compareEmailAndPassword,
                     status: "error",
                     duration: 9000,
                     isClosable: true,
@@ -84,13 +119,13 @@ export default function signUpScreen({ navigation }) {
                 <Heading mt={400} fontSize="14" textColor="black" textAlign={'left'} mb={1}>EMAIL ADDRESS:</Heading>
                 <Input focusBorderColor="gray.900" variant="filled" onChange={(event) => setEmail({ ...email, value: event.currentTarget.value })} mb={2} type="email" />
                 <Heading fontSize="14" textColor="black" textAlign={'left'} mb={1}>CONFIRM EMAIL ADDRESS:</Heading>
-                <Input  focusBorderColor="gray.900" variant="filled" mb={6}  />
+                <Input  focusBorderColor="gray.900" variant="filled" mb={6} onChange={(event) => setConfirmEmail({ ...confirmEmail, value: event.currentTarget.value })} />
                 <Heading fontSize="14" textColor="black" textAlign={'left'} mb={1}>PASSWORD:</Heading>
                 <Input  variant="filled" onChange={(event) => setPassword({ ...password, value: event.currentTarget.value })} mb={2} type="password" />
                 <Heading fontSize="14" textColor="black" textAlign={'left'} mb={1}>CONFIRM PASSWORD:</Heading>
-                <Input  variant="filled" mb={6} type="password" />
+                <Input  variant="filled" mb={6} type="password" onChange={(event) => setConfirmPassword({ ...confirmPassword, value: event.currentTarget.value })} />
                 <Button isLoading={loading} onClick={onSignUpPressed} mb={250} background="gray.900" textColor='white'>Sign Up</Button>
-                <Button variant="link" onClick={() => { router.push("./signIn") } } colorScheme='blackAlpha'>Already have an account? Sign in now</Button>
+                <Button variant="link" onClick={() => { router.push("./signIn") } } colorScheme='black'>Already have an account? Sign in now</Button>
             </Flex>
         </Flex></>
     )

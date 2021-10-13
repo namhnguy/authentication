@@ -9,7 +9,6 @@ import { Flex, Heading } from '@chakra-ui/layout'
 import { Box } from "@chakra-ui/react"
 import { useToast } from "@chakra-ui/react"
 import { useRouter } from "next/router"
-import { BsFillEnvelopeFill } from 'react-icons/fa'
 
 export default function loginScreen({ navigation }) {
     const [email, setEmail] = useState({ value: '', error: '' })
@@ -87,7 +86,7 @@ export default function loginScreen({ navigation }) {
                 <Input variant="filled" onChange={(event) => setPassword({ ...password, value: event.currentTarget.value })} mb={6} type="password" />
                 <Button isLoading={loading} onClick={onLoginPressed} mb={2} background="gray.900" textColor='white'>Login</Button>
                 <Button variant="link" textAlign="right" onClick={() => { router.push("./resetpasswordpage") } } mb={300} textColor='gray'>Forgot password?</Button>
-                <Button variant="link" onClick={() => { router.push("./signUp") } } colorScheme='blackAlpha'>Not a member? Sign up now</Button>
+                <Button variant="link" onClick={() => { router.push("./signUp") } } colorScheme='black'>Not a member? Sign up now</Button>
             </Flex>
         </Flex></>
     )

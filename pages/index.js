@@ -1,21 +1,23 @@
 import React from 'react'
 import { Button } from '@chakra-ui/button'
 import { Flex, Heading } from '@chakra-ui/layout'
-import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
 import { useRouter } from 'next/router'
+import { Box } from "@chakra-ui/react"
 
 export default function StartPage() {
-    const formBackground = useColorModeValue("gray.100", "gray.700")
+    
     const router = useRouter()
 
     return (
-        <Flex height="100vh" alignItems="center" justifyContent="center">
-            <Flex direction="column" background={formBackground} p={12} rounded={6}>
-                <Heading mb={6}>Welcome to HealthTok!</Heading>
-                <Button onClick={() => {router.push("./signIn")}} mb={6} colorScheme='teal'>Login</Button>
-                <Button onClick={() => {router.push("./signUp")}} mb={6} colorScheme='teal'>Create Account</Button>
-                <Button variant="link" onClick={() => {router.push("./landingpage")}} colorScheme='teal'>Continue as guest</Button>
+        <><Box bg="pink" textColor="black" fontSize="32" textAlign="center" w="100%" p={4} color="black">
+            HealthTok
+        </Box><>
+       
+        <Flex height="91vh" alignItems="center" justifyContent="center">
+            <Flex direction="column" p={12} rounded={6}>
+                <Button onClick={() => { router.push("./signIn") } } mb={6} background="gray.900" textColor='white'>Login</Button>
+                <Button onClick={() => { router.push("./landingpage") } }  background="gray.900" textColor='white'>Continue Without Login</Button>
             </Flex>
-        </Flex>
+        </Flex></></>     
     )
 }
